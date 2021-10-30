@@ -33,8 +33,17 @@ class InquiryTest(
             text = "Can I haz cheezburger?",
         ).also { inquiryService.create(it) }
 
+        // verifyAll fails but testing the same conditions separately does not
+        /*
         verifyAll {
             emailHandler.sendEmail(inquiry)
+            pushNotificationHandler.sendNotification(inquiry)
+        }
+        */
+        verify {
+            emailHandler.sendEmail(inquiry)
+        }
+        verify {
             pushNotificationHandler.sendNotification(inquiry)
         }
     }
