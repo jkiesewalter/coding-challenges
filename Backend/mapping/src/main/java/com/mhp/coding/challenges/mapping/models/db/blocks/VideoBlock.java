@@ -21,4 +21,17 @@ public class VideoBlock extends ArticleBlock {
     public void setType(VideoBlockType type) {
         this.type = type;
     }
+    
+    @Override
+    public com.mhp.coding.challenges.mapping.models.dto.blocks.VideoBlock map() {
+        
+        com.mhp.coding.challenges.mapping.models.dto.blocks.VideoBlock blockDto
+          = new com.mhp.coding.challenges.mapping.models.dto.blocks.VideoBlock();
+
+        blockDto.setSortIndex(this.getSortIndex());
+        blockDto.setUrl(this.getUrl());
+        blockDto.setType(this.getType());
+        
+        return blockDto;
+    }
 }

@@ -11,7 +11,26 @@ import java.util.*;
 @Component
 public class ArticleRepository {
 
+    // This field was added to test for the 404
+    private List<Article> articleList = new ArrayList<>();
+    
+    // This method was added to test for the 404
+    public void fillWithDummyArticles() {
+        addArticle(createDummyArticle(1001L));
+        addArticle(createDummyArticle(2002L));
+        addArticle(createDummyArticle(3003L));
+        addArticle(createDummyArticle(4004L));
+        addArticle(createDummyArticle(5005L));
+    }
+    
+    // This method was added to test for the 404
+    public void addArticle(Article article) {
+        articleList.add(article);
+    }
+    
+    // This method was changed to test for the 404
     public List<Article> all(){
+        /*
         final List<Article> result = new ArrayList<>();
         result.add(createDummyArticle(1001L));
         result.add(createDummyArticle(2002L));
@@ -19,10 +38,18 @@ public class ArticleRepository {
         result.add(createDummyArticle(4004L));
         result.add(createDummyArticle(5005L));
         return result;
+        */
+        return articleList;
     }
 
+    // This method was changed to test for the 404
     public Article findBy(Long id){
-        return createDummyArticle(id);
+        //return createDummyArticle(id);
+        for (Article article : all()) {
+            if (article.getId().equals(id))
+                return article;
+        }
+        return null;
     }
 
     public void create(Article article){
@@ -91,6 +118,7 @@ public class ArticleRepository {
         result.setLastModifiedBy("Max Mustermann");
         result.setImageSize(ImageSize.LARGE);
         result.setUrl("https://someurl.com/image/" + imageId);
-        return null;
+        //return null; // this causes errors in the mapping
+        return result;
     }
 }
